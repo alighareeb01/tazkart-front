@@ -92,6 +92,14 @@ export default function Navbar() {
                   >
                     events
                   </NavLink>
+                  {token && (
+                    <NavLink
+                      to="/bookings"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                    >
+                      bookings
+                    </NavLink>
+                  )}
                 </div>
               </div>
             </div>
@@ -168,6 +176,14 @@ export default function Navbar() {
             >
               events
             </NavLink>
+            {token && (
+              <NavLink
+                to="/bookings"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+              >
+                bookings
+              </NavLink>
+            )}
           </div>
         </el-disclosure>
       </nav>
