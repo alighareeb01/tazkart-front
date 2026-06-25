@@ -139,6 +139,9 @@ export default function Login() {
                 {loading ? "loading" : " Login"}
               </button>
             </div>
+            <div className="text-white - underline">
+              <a href="/forget-password">Forget Your Password?</a>
+            </div>
           </form>
         </div>
       </div>

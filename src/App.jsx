@@ -13,6 +13,8 @@ import Profile from "./Components/Profile/Profile";
 import Event from "./Components/Event/Event";
 import Bookings from "./Components/Bookings/Bookings";
 import Edit from "./Components/Edit/Edit";
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
+import ResetPassword from "./Components/RessetPassword/ResetPassword";
 
 const routes = createBrowserRouter([
   {
@@ -27,6 +29,8 @@ const routes = createBrowserRouter([
       { path: "/events/:id", element: <Event /> },
       { path: "/bookings", element: <Bookings /> },
       { path: "/edit", element: <Edit /> },
+      { path: "/forget-password", element: <ForgetPassword /> },
+      { path: "/reset-password/:token", element: <ResetPassword /> },
     ],
   },
 ]);

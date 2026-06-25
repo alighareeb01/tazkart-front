@@ -59,9 +59,7 @@ export default function Signup() {
       }
 
       setFormData(result.message);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+      console.log("noo", formData);
     } catch (err) {
       setErr(err.message);
       console.log("ERROR:", err.message);
@@ -75,22 +73,37 @@ export default function Signup() {
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8  bg-gray-800">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
+          <h2 className="text-center text-2xl/9 font-bold tracking-tight text-white">
             Sign up
           </h2>
           <div>{err && <p className="text-red-600">{err}</p>}</div>
           <div>
-            {formData && <p className="text-green-700">{formData}</p> && (
-              <Link
-                to="/login"
-                className=" mt-2 block  text-white  rounded text-center bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10"
-              >
-                go to login
-              </Link>
-            )}
+            {
+              formData && (
+                // (
+                <p className="mb-5 text-green-700">
+                  {formData}
+                  <Link
+                    to="/login"
+                    className="text-green mt-5 block  text-white  rounded text-center bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10"
+                  >
+                    go to login
+                  </Link>
+                </p>
+              )
+              // ) &&
+              // (
+              //   <Link
+              //     to="/login"
+              //     className="text-green mt-5 block  text-white  rounded text-center bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10"
+              //   >
+              //     Please verfiy your account and go to login
+              //   </Link>
+              // )
+            }
           </div>
         </div>
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm border rounded p-5 border-white/5 outline-1 -outline-offset-1  outline-white/10 ">
+        <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm border rounded p-5 border-white/5 outline-1 -outline-offset-1  outline-white/10 ">
           <form className="space-y-6" onSubmit={handleSubmit(submitForm)}>
             {/* Email */}
             <div>
