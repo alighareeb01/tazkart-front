@@ -61,7 +61,16 @@ function Booking({ booking, index }) {
 
   return (
     <div>
-      <div className="text-indigo-600">Event: {index + 1}</div>
+      {/* <div className="text-indigo-600">Event: {index + 1}</div> */}
+      <div className="flex items-center justify-between rounded-xl bg-gray-900 border border-gray-700 px-6 py-5 shadow-md mb-5">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Event</h1>
+        </div>
+
+        <div className="text-right">
+          <p className="text-4xl font-bold text-indigo-400">{index + 1}</p>
+        </div>
+      </div>
       <Card
         event={booking.event}
         showButton={false}
