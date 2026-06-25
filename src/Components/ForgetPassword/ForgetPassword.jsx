@@ -71,12 +71,15 @@ export default function ForgetPassword() {
         {formData && (
           <p className="text-green-700">
             {formData}
-            <Link
+            {/* <Link
               to="/reset-password"
               className="text-green mt-5 block  text-white  rounded text-center bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10"
             >
               please go to reset your password
-            </Link>
+            </Link> */}
+            <div className="text-green mt-5 block  text-white  rounded text-center bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10">
+              Please go check your email to reset your password
+            </div>
           </p>
         )}
       </div>
