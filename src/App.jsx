@@ -15,6 +15,7 @@ import Bookings from "./Components/Bookings/Bookings";
 import Edit from "./Components/Edit/Edit";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 import ResetPassword from "./Components/RessetPassword/ResetPassword";
+import ProtectedRoutes from "./Components/ProtectedRoutes/ProtectedRoutes";
 
 const routes = createBrowserRouter([
   {
@@ -25,10 +26,31 @@ const routes = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
       { path: "/login", element: <Login /> },
       { path: "/events", element: <Events /> },
-      { path: "/profile", element: <Profile /> },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoutes>
+            <Profile />
+          </ProtectedRoutes>
+        ),
+      },
       { path: "/events/:id", element: <Event /> },
-      { path: "/bookings", element: <Bookings /> },
-      { path: "/edit", element: <Edit /> },
+      {
+        path: "/bookings",
+        element: (
+          <ProtectedRoutes>
+            <Bookings />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/edit",
+        element: (
+          <ProtectedRoutes>
+            <Edit />
+          </ProtectedRoutes>
+        ),
+      },
       { path: "/forget-password", element: <ForgetPassword /> },
       { path: "/reset-password/:token", element: <ResetPassword /> },
     ],
