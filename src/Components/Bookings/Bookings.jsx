@@ -60,8 +60,7 @@ function Booking({ booking, index }) {
   console.log("book", booking._id);
 
   return (
-    <div>
-      {/* <div className="text-indigo-600">Event: {index + 1}</div> */}
+    <div className="flex flex-col gap-3 h-full">
       <div className="flex items-center justify-between rounded-xl bg-gray-900 border border-gray-700 px-6 py-5 shadow-md mb-5">
         <div>
           <h1 className="text-3xl font-bold text-white">Event</h1>

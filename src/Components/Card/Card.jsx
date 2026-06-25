@@ -44,7 +44,7 @@ export function Card({
   }
 
   return (
-    <div className="bg-gray-800 border rounded-lg text-indigo-400   px-3 py-1.5 text-base  w-full  flex flex-col h-full ">
+    <div className="bg-gray-800 border rounded-lg text-indigo-400   px-3 py-4 text-base  w-full  flex flex-col min-h-[500px] ">
       <div className="">
         <img className="h-48 w-full p-5 object-cover" src={event.image} />
       </div>
