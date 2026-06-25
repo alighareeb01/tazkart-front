@@ -11,8 +11,9 @@ export function Card({
   const nav = useNavigate();
 
   const { token } = useContext(TokenContext);
+
   function getEvent() {
-    console.log(event);
+    // console.log(event);
     nav(`/events/${event._id}`);
   }
 

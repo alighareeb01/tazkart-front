@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../Card/Card";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -17,6 +17,7 @@ export default function Event() {
   const [open, setOpen] = useState(false);
   const { token } = useContext(TokenContext);
   const [message, setMessage] = useState("");
+  const nav = useNavigate();
   const {
     register,
     handleSubmit,
@@ -52,6 +53,14 @@ export default function Event() {
 
     console.log("clicked");
 
+    if (!token) {
+      setErr("you are not logged in, please go log in first");
+      setTimeout(() => {
+        nav("/login");
+      }, 2000);
+      return;
+    }
+
     try {
       // console.log(data);
       const res = await fetch(
@@ -83,6 +92,7 @@ export default function Event() {
       console.log(result);
 
       //   console.log("line76", result.error.name);
+      setErr("");
       setMessage(result.status);
     } catch (error) {
       setErr(error);
