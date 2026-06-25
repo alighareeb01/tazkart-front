@@ -28,13 +28,22 @@ export default function Events() {
 
   return (
     <div className="text-3xl font-bold  bg-gray-800">
-      <div className="flex justify-end ">
-        <span className="border rounded-lg px-3 py-1 bg-gray-800 mt-2">
-          <div className="flex ">
-            <p> Available Events :</p>
-            <p> {data.length}</p>
+      <div className="px-6 pt-6">
+        <div className="flex items-center justify-between rounded-xl bg-gray-900 border border-gray-700 px-6 py-5 shadow-md">
+          <div>
+            <h1 className="text-3xl font-bold text-white">Events</h1>
+
+            <p className="mt-1 text-gray-400 text-sm">
+              Discover and book upcoming events
+            </p>
           </div>
-        </span>
+
+          <div className="text-right">
+            <p className="text-gray-400 text-sm">Available Events</p>
+
+            <p className="text-4xl font-bold text-indigo-400">{data.length}</p>
+          </div>
+        </div>
       </div>
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-4">
         {data.map((event) => (
