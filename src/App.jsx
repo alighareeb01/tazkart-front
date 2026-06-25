@@ -58,17 +58,6 @@ const routes = createBrowserRouter([
 ]);
 
 function App() {
-  useEffect(() => {
-    async function getEvents() {
-      const res = await fetch(
-        "tazkarti-backend-rho.vercel.app/api/events?sort=-price",
-      );
-      const data = await res.json();
-      console.log(data);
-    }
-    getEvents();
-  }, []);
-
   return (
     <>
       <RouterProvider router={routes}>Home</RouterProvider>
