@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { TokenContext } from "../Context/TokenContext";
 
 export default function Navbar() {
+  const { token, removeToken } = useContext(TokenContext);
   return (
     <>
       <nav className="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
@@ -67,18 +69,23 @@ export default function Navbar() {
                   >
                     home
                   </NavLink>
-                  <NavLink
-                    to="/signup"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
-                  >
-                    signup
-                  </NavLink>
-                  <NavLink
-                    to="/login"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
-                  >
-                    login
-                  </NavLink>
+                  {!token && (
+                    <NavLink
+                      to="/signup"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                    >
+                      signup
+                    </NavLink>
+                  )}
+
+                  {!token && (
+                    <NavLink
+                      to="/login"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                    >
+                      login
+                    </NavLink>
+                  )}
                   <NavLink
                     to="/events"
                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
@@ -95,7 +102,8 @@ export default function Navbar() {
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   <img
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src="/download.jpeg"
                     alt="profile"
                     className="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
                   />
@@ -112,12 +120,17 @@ export default function Navbar() {
                     profile
                   </NavLink>
 
-                  <NavLink
-                    to="signout"
-                    className="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden"
-                  >
-                    Sign out
-                  </NavLink>
+                  {token && (
+                    <NavLink
+                      onClick={() => {
+                        removeToken();
+                      }}
+                      to="/"
+                      className="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden"
+                    >
+                      sign out
+                    </NavLink>
+                  )}
                 </el-menu>
               </el-dropdown>
             </div>
@@ -127,24 +140,28 @@ export default function Navbar() {
           <div className="space-y-1 px-2 pt-2 pb-3">
             {/* Current: "bg-gray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" */}
             <NavLink
-              to="/home"
+              to="/"
               aria-current="page"
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
             >
               Home
             </NavLink>
-            <NavLink
-              to="/signup"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
-            >
-              signup
-            </NavLink>
-            <NavLink
-              to="/login"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
-            >
-              login
-            </NavLink>
+            {!token && (
+              <NavLink
+                to="/signup"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+              >
+                signup
+              </NavLink>
+            )}
+            {!token && (
+              <NavLink
+                to="/login"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+              >
+                login
+              </NavLink>
+            )}
             <NavLink
               to="/events"
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"

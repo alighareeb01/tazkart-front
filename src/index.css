@@ -111,3 +111,7 @@ code {
 } */
 
 @import "tailwindcss";
+
+body {
+  background-color: #1f2937;
+}

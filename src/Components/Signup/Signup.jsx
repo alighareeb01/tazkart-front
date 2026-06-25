@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import z from "zod";
 
 const signupSchema = z
@@ -28,7 +28,7 @@ export default function Signup() {
   const [formData, setFormData] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-
+  const nav = useNavigate();
   const {
     register,
     handleSubmit,
@@ -41,7 +41,7 @@ export default function Signup() {
 
     try {
       const res = await fetch(
-        "https://tazkarti-backend-production.up.railway.app/api/users/signup",
+        "https://tazkarti-backend-rho.vercel.app/api/users/signup",
         {
           method: "POST",
           headers: {
@@ -70,6 +70,7 @@ export default function Signup() {
       setLoading(false);
     }
   }
+
   return (
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8  bg-gray-800">
@@ -77,10 +78,19 @@ export default function Signup() {
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
             Sign up
           </h2>
+          <div>{err && <p className="text-red-600">{err}</p>}</div>
+          <div>
+            {formData && <p className="text-green-700">{formData}</p> && (
+              <Link
+                to="/login"
+                className=" mt-2 block  text-white  rounded text-center bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10"
+              >
+                go to login
+              </Link>
+            )}
+          </div>
         </div>
-        {err && <p className="text-red-600">{err}</p>}
-        {formData && <p className="text-green-700">{formData}</p>}
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm border rounded p-5 border-gray-500">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm border rounded p-5 border-white/5 outline-1 -outline-offset-1  outline-white/10 ">
           <form className="space-y-6" onSubmit={handleSubmit(submitForm)}>
             {/* Email */}
             <div>

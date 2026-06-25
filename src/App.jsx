@@ -10,6 +10,9 @@ import Events from "./Components/Events/Events";
 import Layout from "./Components/Layout/Layout";
 import Home from "./Components/Home/Home";
 import Profile from "./Components/Profile/Profile";
+import Event from "./Components/Event/Event";
+import Bookings from "./Components/Bookings/Bookings";
+import Edit from "./Components/Edit/Edit";
 
 const routes = createBrowserRouter([
   {
@@ -21,6 +24,9 @@ const routes = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/events", element: <Events /> },
       { path: "/profile", element: <Profile /> },
+      { path: "/events/:id", element: <Event /> },
+      { path: "/bookings", element: <Bookings /> },
+      { path: "/edit", element: <Edit /> },
     ],
   },
 ]);
@@ -29,7 +35,7 @@ function App() {
   useEffect(() => {
     async function getEvents() {
       const res = await fetch(
-        "https://tazkarti-backend-production.up.railway.app/api/events?sort=-price",
+        "tazkarti-backend-rho.vercel.app/api/events?sort=-price",
       );
       const data = await res.json();
       console.log(data);
