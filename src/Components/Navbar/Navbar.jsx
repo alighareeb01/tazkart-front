@@ -54,8 +54,7 @@ export default function Navbar() {
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex shrink-0 items-center">
                 <img
-                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786",
-
+                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
                   alt="Your Company"
                   className="h-8 w-auto"
                 />
