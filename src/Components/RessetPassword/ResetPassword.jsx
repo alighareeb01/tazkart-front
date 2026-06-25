@@ -15,6 +15,8 @@ export default function ResetPassword() {
   // const [err, setErr] = useState("");
   // const nav = useNavigate();
 
+  console.log(token);
+  
   // const {
   //   register,
   //   handleSubmit,
