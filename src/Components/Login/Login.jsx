@@ -40,17 +40,18 @@ export default function Login() {
       );
       console.log("line41", res);
 
-      if (!res.ok) {
-        console.log("SOMETHING WENT WRONG");
-        setErr(res.message);
-        return;
-      }
+     
 
       const result = await res.json();
+      if (!res.ok) {
+        setErr(result.message);
+        return;
+      }
 
       console.log("asd");
 
       console.log("asd", result);
+      
       setFormData(result.message);
 
       saveToken(result.token);
