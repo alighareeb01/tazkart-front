@@ -71,7 +71,7 @@ export default function Signup() {
 
   return (
     <>
-      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8  bg-gray-800">
+      <div className="mt-20  flex min-h-full flex-col justify-center px-6 py-12 lg:px-8  bg-gray-800">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="text-center text-2xl/9 font-bold tracking-tight text-white">
             Sign up
@@ -241,31 +241,6 @@ export default function Signup() {
               </div>
             </div>
 
-            {/* city */}
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="city"
-                  className="block text-sm/6 font-medium text-gray-100"
-                >
-                  City
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="city"
-                  type="text"
-                  name="city"
-                  required
-                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                  {...register("city")}
-                />
-                {errors.city && (
-                  <p className="text-red-500 text-sm">{errors.city.message}</p>
-                )}
-              </div>
-            </div>
-
             <div className="flex gap-2">
               {/* nationality */}
               <div>
@@ -294,7 +269,63 @@ export default function Signup() {
                 </div>
               </div>
 
-              {/* gender */}
+              {/* city */}
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="city"
+                    className="block text-sm/6 font-medium text-gray-100"
+                  >
+                    City
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    id="city"
+                    type="text"
+                    name="city"
+                    required
+                    className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                    {...register("city")}
+                  />
+                  {errors.city && (
+                    <p className="text-red-500 text-sm">
+                      {errors.city.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* date of birth */}
+
+            <div className="flex gap-2 justify-center">
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="datOfBirth"
+                    className="block text-sm/6 font-medium text-gray-100"
+                  >
+                    Date of birth
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    id="datOfBirth"
+                    type="date"
+                    name="datOfBirth"
+                    required
+                    className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                    {...register("datOfBirth")}
+                  />
+                  {errors.datOfBirth && (
+                    <p className="text-red-500 text-sm">
+                      {errors.datOfBirth.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
               <div className="w-full">
                 <div className="flex items-center justify-between">
                   <label className="block text-sm/6 font-medium text-gray-100">
@@ -302,6 +333,7 @@ export default function Signup() {
                   </label>
                 </div>
 
+                {/* {gender} */}
                 <div className="mt-2">
                   <select
                     {...register("gender")}
@@ -323,33 +355,6 @@ export default function Signup() {
                     </p>
                   )}
                 </div>
-              </div>
-            </div>
-
-            {/* date of birth */}
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="datOfBirth"
-                  className="block text-sm/6 font-medium text-gray-100"
-                >
-                  Date of birth
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="datOfBirth"
-                  type="date"
-                  name="datOfBirth"
-                  required
-                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                  {...register("datOfBirth")}
-                />
-                {errors.datOfBirth && (
-                  <p className="text-red-500 text-sm">
-                    {errors.datOfBirth.message}
-                  </p>
-                )}
               </div>
             </div>
 
