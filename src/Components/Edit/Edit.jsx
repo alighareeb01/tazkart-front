@@ -62,7 +62,7 @@ export default function Edit() {
   }
   return (
     <>
-      <div>
+      <div className="mt-20">
         {err && <p className="text-red-600">{err}</p>}
         {formData && (
           <div className="flex justify-center flex-col items-center">
