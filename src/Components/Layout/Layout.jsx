@@ -8,11 +8,13 @@ export default function Layout() {
     <div className="min-h-screen flex flex-col bg-gray-800">
       <Navbar />
 
-      <main className="flex-1 mb-20">
+      <main className="flex-1 ">
         <Outlet />
       </main>
 
-      <Footer />
+      <div className="mt-20">
+        <Footer />
+      </div>
     </div>
   );
 }
