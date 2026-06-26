@@ -45,7 +45,7 @@ export default function Profile() {
     nav("/bookings");
   }
   return (
-    <div className="min-h-screen bg-gray-800 flex justify-center items-start pt-10">
+    <div className="mt-20 p-6 min-h-screen bg-gray-800 flex justify-center items-start pt-10">
       <div className="w-full max-w-md bg-gray-900 border border-gray-700 rounded-2xl shadow-lg p-6">
         {/* Avatar */}
         <div className="flex flex-col items-center">
