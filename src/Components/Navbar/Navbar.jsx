@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { TokenContext } from "../Context/TokenContext";
 
 export default function Navbar() {
   const { token, removeToken } = useContext(TokenContext);
+  const [openMenu, setOpenMenu] = useState(false);
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-3 bg-gray-900 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
@@ -15,6 +16,7 @@ export default function Navbar() {
                 type="button"
                 command="--toggle"
                 commandfor="mobile-menu"
+                onClick={() => setOpenMenu((prev) => !prev)}
                 className="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500"
               >
                 <span className="absolute -inset-0.5" />
@@ -144,48 +146,55 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-        <el-disclosure id="mobile-menu" hidden className="block sm:hidden">
-          <div className="space-y-1 px-2 pt-2 pb-3">
-            {/* Current: "bg-gray-950/50 text-white", Default: "text-white hover:bg-white/5 hover:text-white" */}
-            <NavLink
-              to="/"
-              aria-current="page"
-              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
-            >
-              Home
-            </NavLink>
-            {!token && (
+        {openMenu && (
+          <div className="block sm:hidden space-y-1 px-2 pt-2 pb-3">
+            <div className="space-y-1 px-2 pt-2 pb-3">
+              {/* Current: "bg-gray-950/50 text-white", Default: "text-white hover:bg-white/5 hover:text-white" */}
               <NavLink
-                to="/signup"
+                onClick={() => setOpenMenu((prev) => !prev)}
+                to="/"
+                aria-current="page"
                 className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
               >
-                signup
+                Home
               </NavLink>
-            )}
-            {!token && (
+              {!token && (
+                <NavLink
+                  onClick={() => setOpenMenu((prev) => !prev)}
+                  to="/signup"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
+                >
+                  signup
+                </NavLink>
+              )}
+              {!token && (
+                <NavLink
+                  onClick={() => setOpenMenu((prev) => !prev)}
+                  to="/login"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
+                >
+                  login
+                </NavLink>
+              )}
               <NavLink
-                to="/login"
+                onClick={() => setOpenMenu((prev) => !prev)}
+                to="/events"
                 className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
               >
-                login
+                events
               </NavLink>
-            )}
-            <NavLink
-              to="/events"
-              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
-            >
-              events
-            </NavLink>
-            {token && (
-              <NavLink
-                to="/bookings"
-                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
-              >
-                bookings
-              </NavLink>
-            )}
+              {token && (
+                <NavLink
+                  onClick={() => setOpenMenu((prev) => !prev)}
+                  to="/bookings"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
+                >
+                  bookings
+                </NavLink>
+              )}
+            </div>
           </div>
-        </el-disclosure>
+        )}
       </nav>
     </>
   );
