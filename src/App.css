@@ -186,7 +186,7 @@
    bg-gray-950/50
 } */
 .active {
-  background-color: rgb(49, 17, 138);
+  background-color: rgb(255, 255, 255);
   border-radius: 100;
-  color: white;
+  color: black;
 }

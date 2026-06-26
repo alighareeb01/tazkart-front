@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../Context/TokenContext";
+import { toast } from "react-toastify";
 
 export function Card({
   event,
@@ -17,9 +18,42 @@ export function Card({
     nav(`/events/${event._id}`);
   }
 
-  async function cancelBooking() {
-    console.log("book id", bookingId);
+  function cancelBooking() {
+    toast(
+      ({ closeToast }) => (
+        <div>
+          <p className="mb-4 text-white font-semibold">
+            Are you sure you want to cancel?
+          </p>
 
+          <div className="flex gap-3">
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+              onClick={() => {
+                closeToast();
+                confirmCancel();
+              }}
+            >
+              Yes
+            </button>
+
+            <button
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
+              onClick={closeToast}
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        autoClose: false,
+        closeButton: false,
+      },
+    );
+  }
+
+  async function confirmCancel() {
     const res = await fetch(
       `https://tazkarti-backend-rho.vercel.app/api/bookings/${bookingId}`,
       {
@@ -45,47 +79,34 @@ export function Card({
   }
 
   return (
-    <div className="bg-gray-800 border rounded-lg text-indigo-400   px-3 py-4 text-base  w-full  flex flex-col min-h-[500px] ">
-      <div className="">
-        <img className="h-48 w-full p-5 object-cover" src={event.image} />
+    <div className="hover:-translate-y-2  bg-gray-900 border border-gray-700 rounded-2xl hover:shadow-indigo-500/20 hover:transition duration-300 flex flex-col  ">
+      <div className="h-52 w-full overflow-hidden rounded-t-2xl">
+        <img className="object-cover h-full w-full p-5" src={event.image} />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 p-5">
         <h2>
-          <span className="text-indigo-400">Title </span>
-          <span className="text-gray-400">: {event.title}</span>
+          <span className="text-xl font-bold text-white mb-3">
+            {event.title}
+          </span>
         </h2>
-        <h2>
-          <span className="text-indigo-400">Price </span>
-          <span className="text-gray-400">: {event.price}$</span>
-        </h2>
-        <h2>
-          <span className="text-indigo-400">location </span>
-          <span className="text-gray-400">: {event.location}</span>
-        </h2>
-        <h2>
-          <span className="text-indigo-400">Category </span>
-          <span className="text-gray-400">: {event.category}</span>
-        </h2>
-        <h2>
-          <span className="text-indigo-400">date </span>
-          <span className="text-gray-400">: {event.date?.split("T")[0]}</span>
-        </h2>
-        <h2>
-          <span className="text-indigo-400">description </span>
-          <span className="text-gray-400">: {event.description}</span>
-        </h2>
-        <h2>
-          <span className="text-indigo-400">Available seats </span>
-          <span className="text-gray-400">: {event.availableSeats}</span>
-        </h2>
+        <div className=" text-sm">
+          <p className="text-gray-400"> 📍{event.location}</p>
+
+          <p className="text-gray-400">📅 {event.date?.split("T")[0]}</p>
+
+          <p className="text-gray-400">🪑 {event.availableSeats}</p>
+
+          <p className="text-gray-400 ">$ {event.price}</p>
+          <p className="text-gray-400 line-clamp-3">{event.description}</p>
+        </div>
       </div>
-      <div className="flex justify-center mt-1">
+      <div className="p-5 mt-1">
         {showButton && (
           <button
             onClick={getEvent}
             // disabled={loading}
             type="submit"
-            className="disabled:hover:cursor-not-allowed flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            className=" w-full  disabled:hover:cursor-not-allowed flex  justify-center rounded-md bg-white px-3 py-1.5 text-sm/6 font-semibold text-black hover:bg-indigo-400 hover:transition"
           >
             Check Event
           </button>
@@ -95,7 +116,7 @@ export function Card({
             onClick={cancelBooking}
             // disabled={loading}
             type="submit"
-            className="disabled:hover:cursor-not-allowed flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            className=" w-full  disabled:hover:cursor-not-allowed flex  justify-center rounded-md bg-white px-3 py-1.5 text-sm/6 font-semibold text-black hover:bg-indigo-400 hover:transition"
           >
             cancel Event
           </button>

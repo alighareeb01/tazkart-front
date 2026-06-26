@@ -16,6 +16,8 @@ import Edit from "./Components/Edit/Edit";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 import ResetPassword from "./Components/RessetPassword/ResetPassword";
 import ProtectedRoutes from "./Components/ProtectedRoutes/ProtectedRoutes";
+import { Toaster } from "react-hot-toast";
+import { ToastContainer } from "react-toastify";
 
 const routes = createBrowserRouter([
   {
@@ -60,7 +62,15 @@ const routes = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={routes}>Home</RouterProvider>
+      <RouterProvider router={routes} />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        theme="dark"
+        toastClassName="!bg-gray-900 !border !border-gray-700 !rounded-xl !text-white shadow-lg"
+        bodyClassName="text-gray-200 font-medium"
+        progressClassName="!bg-indigo-500"
+      />
     </>
   );
 }
