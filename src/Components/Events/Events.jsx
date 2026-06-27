@@ -14,7 +14,7 @@ export default function Events() {
     async function getEvents() {
       try {
         const res = await fetch(
-          "https://tazkarti-backend-rho.vercel.app/api/events",
+          "https://tazkarti-backend-rho.vercel.app/api/events?limit=100",
         );
         // console.log(res);
         // console.log("status:", res.status);
