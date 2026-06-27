@@ -1,13 +1,47 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { TokenContext } from "../Context/TokenContext";
 
 export default function Home() {
+  const [data, setData] = useState({});
+  const [err, setErr] = useState("");
+
   const role = useSelector((state) => state.logged.role);
+  const { token } = useContext(TokenContext);
+
+  useEffect(() => {
+    async function getStats() {
+      setErr("");
+      try {
+        const res = await fetch(
+          "https://tazkarti-backend-rho.vercel.app/api/users/stats",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        const result = await res.json();
+
+        if (!res.ok) {
+          setErr(result.message);
+        }
+        console.log(result, "adsasdasdasd");
+        setData(result.data);
+      } catch (error) {
+        setErr(error.message);
+      }
+    }
+
+    getStats();
+  }, []);
 
   if (role === "admin") {
     return (
       <div className="min-h-screen bg-gray-800 pt-24 px-6">
+        {err && <p className="mt-20 text-red-500">{err}</p>}
         <div className="max-w-6xl mx-auto">
           <h1 className="text-5xl font-semibold text-white">
             Welcome back, Admin
@@ -65,17 +99,17 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-6 mt-10">
             <div className="bg-gray-900 rounded-xl p-6 text-white">
               <p className="text-gray-400">Total Events</p>
-              <h3 className="text-4xl mt-2">12</h3>
+              <h3 className="text-4xl mt-2">{data?.events}</h3>
             </div>
 
             <div className="bg-gray-900 rounded-xl p-6 text-white">
               <p className="text-gray-400">Total Bookings</p>
-              <h3 className="text-4xl mt-2">45</h3>
+              <h3 className="text-4xl mt-2">{data?.bookings}</h3>
             </div>
 
             <div className="bg-gray-900 rounded-xl p-6 text-white">
               <p className="text-gray-400">Users</p>
-              <h3 className="text-4xl mt-2">200</h3>
+              <h3 className="text-4xl mt-2">{data?.users}</h3>
             </div>
           </div>
         </div>
