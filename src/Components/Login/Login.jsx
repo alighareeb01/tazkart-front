@@ -41,7 +41,7 @@ export default function Login() {
           body: JSON.stringify(data),
         },
       );
-      console.log("line41", res);
+      // console.log("line41", res);
 
       const result = await res.json();
       if (!res.ok) {
@@ -49,7 +49,7 @@ export default function Login() {
         return;
       }
 
-      console.log("asd");
+      // console.log("asd");
 
       // console.log("asd", result.data.user.role);
       dispatch(setRole(result.data.user.role));

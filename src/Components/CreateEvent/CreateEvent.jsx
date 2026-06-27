@@ -86,7 +86,7 @@ export default function CreateEvent() {
 
       setFormData(result.message);
 
-      // nav("/");
+      nav("/events");
     } catch (err) {
       setErr(err.message);
       console.log("ERROR:", err.message);

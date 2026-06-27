@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TokenContext } from "../Context/TokenContext";
 import Errorfetching from "../Errorfetching/Errorfetching";
 import Loadingdata from "../Loadingdata/Loadingdata";
+import { useSelector } from "react-redux";
 
 const seatSchema = z.object({
   seats: z.coerce.number().min(1, "minimum number of seats is 1"),
@@ -21,6 +22,7 @@ export default function Event() {
   const { token } = useContext(TokenContext);
   const [message, setMessage] = useState("");
   const nav = useNavigate();
+  const role = useSelector((state) => state.logged.role);
   const {
     register,
     handleSubmit,
@@ -105,6 +107,7 @@ export default function Event() {
       //   console.log("line76", result.error.name);
       setErr("");
       setMessage(result.status);
+      nav("/bookings");
     } catch (error) {
       setErr(error);
       //   console.log("eeee", error);
@@ -123,70 +126,77 @@ export default function Event() {
   ) : err ? (
     <Errorfetching />
   ) : (
-    <div className="mt-20 bg-gray-800 grid grid-cols-1 gap-3 sm:grid-cols-2">
-      <Card event={data} showButton={false} />
+    <div className="mt-20 bg-gray-800 grid grid-cols-1 gap-3 sm:grid-cols-2 ">
+      <Card
+        event={data}
+        showButton={false}
+        showDeleteButton={role === "admin"}
+      />
 
-      <div className="text-center text-indigo-400">
-        <form className="space-y-6" onSubmit={handleSubmit(handleSeatSubmit)}>
-          <div>
-            <label
-              htmlFor="seats"
-              className="block text-sm font-medium text-gray-100"
-            >
-              seats
-            </label>
-
-            <div className="mt-2">
-              <input
-                id="seats"
-                type="number"
-                className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-white"
-                {...register("seats")}
-              />
-
-              {errors.seats && (
-                <p className="text-red-500 text-sm">{errors.seats.message}</p>
-              )}
-            </div>
-
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="mt-5 w-3/4 rounded-md bg-white px-3 py-1.5 font-semibold text-black hover:bg-indigo-400"
+      {role !== "admin" && (
+        <div className="text-center text-indigo-400">
+          <form className="space-y-6" onSubmit={handleSubmit(handleSeatSubmit)}>
+            <div>
+              <label
+                htmlFor="seats"
+                className="block text-sm font-medium text-gray-100"
               >
-                Book Event
-              </button>
+                seats
+              </label>
+
+              <div className="mt-2">
+                <input
+                  id="seats"
+                  type="number"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-white"
+                  {...register("seats")}
+                />
+
+                {errors.seats && (
+                  <p className="text-red-500 text-sm">{errors.seats.message}</p>
+                )}
+              </div>
+
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="mt-5 w-3/4 rounded-md bg-white px-3 py-1.5 font-semibold text-black hover:bg-indigo-400"
+                >
+                  Book Event
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
 
-        <div className="border rounded-lg p-5 mt-5 bg-gray-900">
-          <button
-            type="button"
-            className="cursor-pointer text-white"
-            onClick={handleTermsModal}
-          >
-            ➡️ terms of entry
-          </button>
+          <div className="border rounded-lg p-5 mt-5 bg-gray-900">
+            <button
+              type="button"
+              className="cursor-pointer text-white"
+              onClick={handleTermsModal}
+            >
+              ➡️ terms of entry
+            </button>
+          </div>
+
+          {open && (
+            <div className="border rounded-lg mt-1 p-5 text-white bg-gray-900">
+              <ul>
+                <li>- Please Attend on Time</li>
+                <li>- Recording is Not Allowed</li>
+                <li>- Camera Is Not Allowed</li>
+                <li>
+                  - The ticket guarantees entry for the three days of the
+                  training
+                </li>
+              </ul>
+            </div>
+          )}
+
+          {err && <p className="text-red-600">{err}</p>}
+
+          {message && <p className="text-green-600">{message}: booked</p>}
         </div>
-
-        {open && (
-          <div className="border rounded-lg mt-1 p-5 text-white bg-gray-900">
-            <ul>
-              <li>- Please Attend on Time</li>
-              <li>- Recording is Not Allowed</li>
-              <li>- Camera Is Not Allowed</li>
-              <li>
-                - The ticket guarantees entry for the three days of the training
-              </li>
-            </ul>
-          </div>
-        )}
-
-        {err && <p className="text-red-600">{err}</p>}
-
-        {message && <p className="text-green-600">{message}: booked</p>}
-      </div>
+      )}
     </div>
   );
 }
