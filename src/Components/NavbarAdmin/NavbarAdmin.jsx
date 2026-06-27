@@ -110,6 +110,12 @@ export default function NavbarAdmin() {
                       Create Event
                     </NavLink>
                   )}
+                  <NavLink
+                    to="/hot-events"
+                    className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white"
+                  >
+                    Hot Events🔥
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -198,6 +204,12 @@ export default function NavbarAdmin() {
                   Bookings
                 </NavLink>
               )}
+              <NavLink
+                to="/hot-events"
+                className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white"
+              >
+                Hot Events🔥
+              </NavLink>
             </div>
           </div>
         )}

@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export default function e() {
   return (
     <div className="min-h-screen mt-20 bg-gray-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6">

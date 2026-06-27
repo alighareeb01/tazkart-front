@@ -23,6 +23,7 @@ import LayoutAdmin from "./Components/LayoutAdmin/LayoutAdmin";
 import { useSelector } from "react-redux";
 import CreateEvent from "./Components/CreateEvent/CreateEvent";
 import AdminRoute from "./Components/AdminRoute/AdminRoute";
+import HotEvents from "./Components/HotEvents/HotEvents";
 
 function App() {
   const role = useSelector((state) => state.logged.role);
@@ -37,6 +38,7 @@ function App() {
         { path: "/signup", element: <Signup /> },
         { path: "/login", element: <Login /> },
         { path: "/events", element: <Events /> },
+        { path: "/hot-events", element: <HotEvents /> },
         {
           path: "/profile",
           element: (
