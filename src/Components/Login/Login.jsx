@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import z from "zod";
 import { TokenContext } from "../Context/TokenContext";
+import { useDispatch } from "react-redux";
+import { setRole } from "../store/roleSlice";
 
 const signupSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -16,6 +18,7 @@ export default function Login() {
   const [err, setErr] = useState("");
   const nav = useNavigate();
   const { saveToken } = useContext(TokenContext);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -40,8 +43,6 @@ export default function Login() {
       );
       console.log("line41", res);
 
-     
-
       const result = await res.json();
       if (!res.ok) {
         setErr(result.message);
@@ -50,16 +51,14 @@ export default function Login() {
 
       console.log("asd");
 
-      console.log("asd", result);
-      
+      // console.log("asd", result.data.user.role);
+      dispatch(setRole(result.data.user.role));
+
       setFormData(result.message);
 
       saveToken(result.token);
 
-      setTimeout(() => {
-        nav("/");
-        setLoading(false);
-      }, 2000);
+      nav("/");
     } catch (err) {
       setErr(err.message);
       console.log("ERROR:", err.message);

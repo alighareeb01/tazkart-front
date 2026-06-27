@@ -18,48 +18,65 @@ import ResetPassword from "./Components/RessetPassword/ResetPassword";
 import ProtectedRoutes from "./Components/ProtectedRoutes/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
-
-const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "/signup", element: <Signup /> },
-      { path: "/login", element: <Login /> },
-      { path: "/events", element: <Events /> },
-      {
-        path: "/profile",
-        element: (
-          <ProtectedRoutes>
-            <Profile />
-          </ProtectedRoutes>
-        ),
-      },
-      { path: "/events/:id", element: <Event /> },
-      {
-        path: "/bookings",
-        element: (
-          <ProtectedRoutes>
-            <Bookings />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/edit",
-        element: (
-          <ProtectedRoutes>
-            <Edit />
-          </ProtectedRoutes>
-        ),
-      },
-      { path: "/forget-password", element: <ForgetPassword /> },
-      { path: "/reset-password/:token", element: <ResetPassword /> },
-    ],
-  },
-]);
+import Notfound from "./Components/Notfound/Notfound";
+import LayoutAdmin from "./Components/LayoutAdmin/LayoutAdmin";
+import { useSelector } from "react-redux";
+import CreateEvent from "./Components/CreateEvent/CreateEvent";
+import AdminRoute from "./Components/AdminRoute/AdminRoute";
 
 function App() {
+  const role = useSelector((state) => state.logged.role);
+  console.log("role", role);
+
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: role === "admin" ? <LayoutAdmin /> : <Layout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: "/signup", element: <Signup /> },
+        { path: "/login", element: <Login /> },
+        { path: "/events", element: <Events /> },
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoutes>
+              <Profile />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/bookings",
+          element: (
+            <ProtectedRoutes>
+              <Bookings />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/edit",
+          element: (
+            <ProtectedRoutes>
+              <Edit />
+            </ProtectedRoutes>
+          ),
+        },
+        { path: "/events/:id", element: <Event /> },
+        { path: "/forget-password", element: <ForgetPassword /> },
+        { path: "/reset-password/:token", element: <ResetPassword /> },
+        {
+          path: "/create-event",
+          element: (
+            <AdminRoute>
+              <CreateEvent />
+            </AdminRoute>
+          ),
+        },
+        { path: "/*", element: <Notfound /> },
+      ],
+    },
+  ]);
+
   return (
     <>
       <RouterProvider router={routes} />

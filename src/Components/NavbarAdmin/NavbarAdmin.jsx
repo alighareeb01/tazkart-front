@@ -1,19 +1,17 @@
 import React, { useContext, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { TokenContext } from "../Context/TokenContext";
 import { useDispatch } from "react-redux";
 import { clearRole } from "../store/roleSlice";
 
-export default function Navbar() {
+export default function NavbarAdmin() {
   const { token, removeToken } = useContext(TokenContext);
   const [openMenu, setOpenMenu] = useState(false);
   const dispatch = useDispatch();
-  const nav = useNavigate();
 
   function signoutHandler() {
     removeToken();
     dispatch(clearRole());
-    nav("/login");
   }
   return (
     <>
@@ -79,14 +77,14 @@ export default function Navbar() {
                     aria-current="page"
                     className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white"
                   >
-                    home
+                    Home
                   </NavLink>
                   {!token && (
                     <NavLink
                       to="/signup"
                       className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white"
                     >
-                      signup
+                      Signup
                     </NavLink>
                   )}
 
@@ -95,21 +93,21 @@ export default function Navbar() {
                       to="/login"
                       className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white"
                     >
-                      login
+                      Login
                     </NavLink>
                   )}
                   <NavLink
                     to="/events"
                     className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white"
                   >
-                    events
+                    Events
                   </NavLink>
                   {token && (
                     <NavLink
-                      to="/bookings"
+                      to="/create-event"
                       className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white"
                     >
-                      bookings
+                      Create Event
                     </NavLink>
                   )}
                 </div>
@@ -137,7 +135,7 @@ export default function Navbar() {
                     to="/profile"
                     className="block px-4 py-2 text-sm text-white focus:bg-white/5 focus:outline-hidden"
                   >
-                    profile
+                    Profile
                   </NavLink>
 
                   {token && (
@@ -146,7 +144,7 @@ export default function Navbar() {
                       to="/"
                       className="block px-4 py-2 text-sm text-white focus:bg-white/5 focus:outline-hidden"
                     >
-                      sign out
+                      Signout
                     </NavLink>
                   )}
                 </el-menu>
@@ -172,7 +170,7 @@ export default function Navbar() {
                   to="/signup"
                   className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
                 >
-                  signup
+                  Signup
                 </NavLink>
               )}
               {!token && (
@@ -181,15 +179,15 @@ export default function Navbar() {
                   to="/login"
                   className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
                 >
-                  login
+                  Login
                 </NavLink>
               )}
               <NavLink
                 onClick={() => setOpenMenu((prev) => !prev)}
-                to="/events"
+                to="/create-event"
                 className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
               >
-                events
+                Create Event
               </NavLink>
               {token && (
                 <NavLink
@@ -197,7 +195,7 @@ export default function Navbar() {
                   to="/bookings"
                   className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-white/5 hover:text-white"
                 >
-                  bookings
+                  Bookings
                 </NavLink>
               )}
             </div>
